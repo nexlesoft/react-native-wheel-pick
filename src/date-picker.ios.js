@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
-// import { DatePickerIOS } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import { DatePickerIOS } from 'react-native';
 import PropTypes from 'prop-types';
 
 export default class DatePicker extends PureComponent {
   static propTypes = {
-    date: PropTypes.instanceOf(Date),
+    date: PropTypes.instanceOf(Date).isRequired,
     maximumDate: PropTypes.instanceOf(Date),
     minimumDate: PropTypes.instanceOf(Date),
     mode: PropTypes.oneOf(['date', 'time', 'datetime']),
@@ -18,35 +17,33 @@ export default class DatePicker extends PureComponent {
   };
 
   state = {
-    date: new Date(),
+    date: null,
   };
-
-  // @react-native-community/datetimepicker
-  //2022 use value instead of date
-  //2022 use onChange instead of onDateChange (and first param not date anymore)
-  render() {
-    return (
-      <DateTimePicker
-        {...this.props}
-        onChange={(event, date) => this.onDateChange(date)}
-        display='spinner'
-        value={this.state.date}
-      />
-    );
-  }
-
-  componentDidMount() {
-    this.setState({ date: this.props.date })
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.date !== prevProps.date) {
-      this.setState({ date: this.props.date })
-    }
-  }
 
   onDateChange = (date) => {
     this.setState({ date });
     this.props.onDateChange(date);
+  };
+
+  componentWillMount() {
+    this.setState({ date: this.props.date });
+  }
+
+  componentWillReceiveProps({ date }) {
+    this.setState({ date });
+  }
+
+  render() {
+    return (
+      <DatePickerIOS
+        {...this.props}
+        onDateChange={this.onDateChange}
+        date={this.state.date}
+      />
+    );
+  }
+
+  getValue() {
+    return this.state.date;
   }
 }

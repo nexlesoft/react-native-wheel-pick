@@ -1,34 +1,48 @@
 {
-  "name": "react-native-wheel-pick",
-  "version": "1.2.2",
-  "description": "React native wheel picker iOS style with android.",
+  "name": "react-native-wheel-datepicker",
+  "version": "2.2.3",
+  "description": "React native cross platform iOS-style picker and datepicker.",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TronNatthakorn/react-native-wheel-pick.git"
+    "url": "git+https://github.com/pinguinjkeke/react-native-wheel-datepicker.git"
   },
   "keywords": [
     "react-native",
-    "react-native-wheel",
-    "react-native-wheel-pick",
-    "react-native-wheel-picker"
+    "datepicker",
+    "picker",
+    "wheel"
   ],
-  "author": "Tron Natthakorn <tron.natthakorn@engineer.com>",
-  "license": "Apache-2.0",
+  "author": "Alexander Avakov <yaavakov@gmail.com>",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TronNatthakorn/react-native-wheel-pick/issues"
+    "url": "https://github.com/pinguinjkeke/react-native-wheel-datepicker/issues"
   },
-  "homepage": "https://github.com/TronNatthakorn/react-native-wheel-pick#readme",
+  "homepage": "https://github.com/pinguinjkeke/react-native-wheel-datepicker#readme",
   "dependencies": {
+    "@react-native-picker/picker": "^2.6.1",
     "moment": "^2.19.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.0",
+    "eslint": "^4.7.2",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.4.0",
+    "eslint-plugin-react-native": "^3.1.0"
   },
   "peerDependencies": {
     "moment": ">=2.0.0",
     "prop-types": "*",
-    "@react-native-community/datetimepicker": ">=6.1.3",
-    "@react-native-picker/picker": ">=2.4.1"
+    "react-native": ">=0.45.0"
+  },
+  "rnpm": {
+    "android": {
+      "packageInstance": "new ReactNativeWheelPickerPackage()"
+    }
   }
 }

@@ -1,10 +1,8 @@
 import React, { PureComponent } from 'react';
-import { requireNativeComponent, View } from 'react-native';
-// import { ColorPropType, ViewPropTypes as RNViewPropTypes, } from 'deprecated-react-native-prop-types'
+import { ColorPropType, requireNativeComponent, View, ViewPropTypes as RNViewPropTypes } from 'react-native';
 import PropTypes from 'prop-types';
 
-// const ViewPropTypes = RNViewPropTypes || View.propTypes;
-let firstTimeOnChange = true
+const ViewPropTypes = RNViewPropTypes || View.propTypes;
 
 const stateFromProps = (props) => {
   let selectedIndex = 0;
@@ -22,37 +20,30 @@ const stateFromProps = (props) => {
 
 class WheelCurvedPicker extends PureComponent {
   static propTypes = {
-    // ...ViewPropTypes,
+    ...ViewPropTypes,
     data: PropTypes.array,
-    // textColor: ColorPropType,
+    textColor: ColorPropType,
     textSize: PropTypes.number,
+    itemSpace: PropTypes.number,
     onValueChange: PropTypes.func.isRequired,
     selectedValue: PropTypes.any,
-    // selectedIndex: PropTypes.number,
+    selectedIndex: PropTypes.number,
   };
 
   static defaultProps = {
     textSize: 26,
+    itemSpace: 20,
     textColor: '#333',
   };
 
-  state = {
-    selectedIndex: 0
+  onValueChange = ({ nativeEvent: { data } }) => this.props.onValueChange(data);
+
+  componentWillMount() {
+    this.setState(stateFromProps(this.props));
   }
 
-  onValueChange = ({ nativeEvent: { data } }) => {
-    this.props.onValueChange(data); 
-    if(firstTimeOnChange) {
-      return firstTimeOnChange = false
-    }
-  }
-
-  // componentDidMount() {
-  //   this.setState(stateFromProps(this.props));
-  // }
-
-  static getDerivedStateFromProps(nextProps) {
-    return stateFromProps(nextProps)
+  componentWillReceiveProps(nextProps) {
+    this.setState(stateFromProps(nextProps));
   }
 
   render() {
@@ -76,7 +67,7 @@ class Item extends PureComponent {
   };
 
   // These items don't get rendered directly.
-  render = () => <></>;
+  render: () => null;
 }
 
 WheelCurvedPicker.Item = Item;

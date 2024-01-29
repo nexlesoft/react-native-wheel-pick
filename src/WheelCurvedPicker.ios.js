@@ -1,4 +1,4 @@
 import React from 'react';
-import { Picker } from '@react-native-picker/picker';
+import { PickerIOS } from '@react-native-picker/picker';
 
-export default Picker;
+export default PickerIOS;
